@@ -10,6 +10,14 @@ node {
         checkout scm
     }
 
+    stage('Test') {
+        if(isUnix()) {
+            sh "'${goHome}/bin/go' test -v"
+        } else {
+            bat(/"${goHome}\bin\go" test -v/)
+        }
+    }
+
     stage('Build') {
         if(isUnix()) {
             sh "'${goHome}/bin/go' build"
