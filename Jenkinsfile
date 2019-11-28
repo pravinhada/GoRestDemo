@@ -12,9 +12,9 @@ node {
 
     stage('Build') {
         if(isUnix()) {
-            sh "'${mvnHome}/bin/go' build"
+            sh "'${goHome}/bin/go' build"
         } else {
-            bat(/"${mvnHome}\bin\go" build/)
+            bat(/"${goHome}\bin\go" build/)
         }
     }
 
