@@ -20,7 +20,7 @@ type allEvents []event
 var events = allEvents{}
 
 func init() {
-	fmt.Println("This will get called first!")
+	fmt.Println("Initializing the default events!")
 	file, _ := ioutil.ReadFile("sample.json")
 	err := json.Unmarshal([]byte(file), &events)
 	if err != nil {
