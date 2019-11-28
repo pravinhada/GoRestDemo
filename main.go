@@ -17,12 +17,15 @@ type event struct {
 
 type allEvents []event
 
-var events = allEvents{
-	{
-		ID:          "1",
-		Title:       "Introduction to Golang",
-		Description: "Come join us for a chance to learn how golang works and get to eventually try it out",
-	},
+var events = allEvents{}
+
+func init() {
+	fmt.Println("This will get called first!")
+	file, _ := ioutil.ReadFile("sample.json")
+	err := json.Unmarshal([]byte(file), &events)
+	if err != nil {
+		fmt.Println("Unable to load the sample file.")
+	}
 }
 
 func homeLink(w http.ResponseWriter, r *http.Request) {
@@ -111,7 +114,7 @@ func main() {
 	})
 
 	handler := c.Handler(router)
-	fmt.Println("Server is starting at port 8080.")
+	fmt.Println("Server is starting at port 8090.")
 	err := http.ListenAndServe(":8090", handler)
 	if err != nil {
 		panic(err)

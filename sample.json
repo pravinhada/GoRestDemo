@@ -1,0 +1,22 @@
+[
+  {
+    "ID": "1",
+    "Title": "Introduction to Golang",
+    "Description": "Come join us for a chance to learn how golang works and get to eventually try it out"
+  },
+  {
+    "ID": "2",
+    "Title": "Intelligent Investor",
+    "Description": "One of the best book on value investment by Benjamin Graham"
+  },
+  {
+    "ID": "3",
+    "Title": "Docker in Action",
+    "Description": "Learn in depth docker networking"
+  },
+  {
+    "ID": "4",
+    "Title": "The Selfish Gene",
+    "Description": "Good read form Richard Dawkins"
+  }
+]
