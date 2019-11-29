@@ -9,6 +9,16 @@ node {
     stage('Checkout') {
         checkout scm
     }
+    
+    stage('Install dependencies') {
+        if(isUnix()) {
+            sh "'${goHome}/bin/go' get -u github.com/gorilla/mux"
+            sh "'${goHome}/bin/go' get -u github.com/rs/cors"
+        } else {
+            bat(/"${goHome}\bin\go" get -u github.com\/gorilla\/mux/)
+            bat(/"${goHome}\bin\go" get -u github.com\/rs\/cors/)
+        }        
+    }
 
     stage('Test') {
         if(isUnix()) {
