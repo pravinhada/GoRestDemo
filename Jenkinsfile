@@ -4,6 +4,11 @@ node {
 
     stage('Prepare') {
         goHome = tool 'jenkins_go'
+        if(isUnix()) {
+            sh "export GOPATH=${goHome}/go"
+        } else {
+            bat(/"${goHome}\bin\go" env -w GOPATH=${goHome}\go/)
+        }        
     }
 
     stage('Checkout') {
