@@ -4,6 +4,7 @@ node {
 
     stage('Prepare') {
         goHome = tool 'jenkins_go'
+        echo "GOPATH is ${goHome}"
         if(isUnix()) {
             sh "export GOPATH=${goHome}/go"
         } else {
