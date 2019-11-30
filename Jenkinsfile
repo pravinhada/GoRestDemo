@@ -4,10 +4,26 @@ node {
 
     stage('Prepare') {
         goHome = tool 'jenkins_go'
+        echo "GOPATH is ${goHome}"
+        if(isUnix()) {
+            sh "export GOPATH=${goHome}/go"
+        } else {
+            bat(/"${goHome}\bin\go" env -w GOPATH=${goHome}\go/)
+        }        
     }
 
     stage('Checkout') {
         checkout scm
+    }
+    
+    stage('Install dependencies') {
+        if(isUnix()) {
+            sh "'${goHome}/bin/go' get -u github.com/gorilla/mux"
+            sh "'${goHome}/bin/go' get -u github.com/rs/cors"
+        } else {
+            bat(/"${goHome}\bin\go" get -u github.com\/gorilla\/mux/)
+            bat(/"${goHome}\bin\go" get -u github.com\/rs\/cors/)
+        }        
     }
 
     stage('Test') {
