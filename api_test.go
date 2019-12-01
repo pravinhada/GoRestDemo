@@ -3,12 +3,32 @@ package main
 import (
 	"bytes"
 	"encoding/json"
-	"github.com/gorilla/mux"
 	"net/http"
 	"net/http/httptest"
 	"strings"
 	"testing"
+
+	"github.com/gorilla/mux"
 )
+
+func TestHomePage(t *testing.T) {
+	req, err := http.NewRequest("GET", "/", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	rr := httptest.NewRecorder()
+	handler := http.HandlerFunc(homeLink)
+	handler.ServeHTTP(rr, req)
+	if status := rr.Code; status != http.StatusOK {
+		t.Errorf("handler returned wrong status code: got %v want %v", status, http.StatusOK)
+	}
+
+	expectedValue := "Welcome Home!"
+	if !strings.Contains(rr.Body.String(), expectedValue) {
+		t.Errorf("The expected value [%v] is not in the default json", expectedValue)
+	}
+}
 
 func TestGetAllEvents(t *testing.T) {
 	req, err := http.NewRequest("GET", "/events", nil)
