@@ -3,10 +3,11 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/gorilla/mux"
-	"github.com/rs/cors"
 	"io/ioutil"
 	"net/http"
+
+	"github.com/gorilla/mux"
+	"github.com/rs/cors"
 )
 
 type event struct {
